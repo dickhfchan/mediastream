@@ -1,191 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <!-- Google Analytics Tag -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-BXJH211CB8"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-<head>
-  <!-- Google Analytics Tag -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BXJH211CB8"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+      gtag("config", "G-BXJH211CB8");
+    </script>
 
-    gtag('config', 'G-BXJH211CB8');
-  </script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Genki Arcade</title>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <link rel="manifest" href="/manifest.json" />
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <!-- <script async src="capture.js"></script> -->
+  </head>
 
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Genki Arcade</title>
-  <link rel="stylesheet" href="style.css" type="text/css" />
-  <link rel="manifest" href="/manifest.json">
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-  <script async src="capture.js"></script>
-</head>
+  <body>
+    <video id="video">Video stream not avaiable</video>
 
-<body>
-  <video id="video">Video stream not avaiable</video>
-
-  <!-- Remarked to disable the example of ffmpeg -->
-  <!-- <video id="player" controls></video>
+    <!-- Remarked to disable the example of ffmpeg -->
+    <!-- <video id="player" controls></video>
       <input type="file" id="uploader" /> -->
 
-  <div id="settings_container" class="settings--container" style="left: 0; visibility: visible">
-    <div style="height: 5"></div>
-    <div class="settings-item--container">
-      <div class="settings-item--header" onclick="onVideoDropdown()">
-        <div class="settings-item--header-title">Video</div>
-        <img id="video-arrow" src="./assets/icons/arrow_down.svg" />
-      </div>
-      <div id="video-items"></div>
-    </div>
-
-    <div class="settings-item--container">
-      <div class="settings-item--header" onclick="onResolutionDropdown()">
-        <div class="settings-item--header-title">Resolution</div>
-        <img id="resolution-arrow" src="./assets/icons/arrow_down.svg" />
-      </div>
-      <div id="resolution-items"></div>
-    </div>
-
-    <div class="settings-item--container">
-      <div class="settings-item--header" onclick="onFrameRateDropdown()">
-        <div class="settings-item--header-title">Framerate</div>
-        <img id="framerate-arrow" src="./assets/icons/arrow_down.svg" />
-      </div>
-      <div id="framerate-items"></div>
-    </div>
-
-    <div class="settings-item--container">
-      <div class="settings-item--header" onclick="onMicDropdown()">
-        <div class="settings-item--header-title">Microphone</div>
-        <img id="mic-arrow" src="./assets/icons/arrow_down.svg" />
-      </div>
-      <div id="mic-items"></div>
-    </div>
-
-    <div class="settings-item--container">
-      <div class="settings-item--header">
-        <div class="settings-item--header-title">Volume</div>
+    <div
+      id="settings_container"
+      class="settings--container"
+      style="left: 0; visibility: visible"
+    >
+      <div style="height: 5"></div>
+      <div class="settings-item--container">
+        <div class="settings-item--header" onclick="onVideoDropdown()">
+          <div class="settings-item--header-title">Video</div>
+          <img id="video-arrow" src="./assets/icons/arrow_down.svg" />
+        </div>
+        <div id="video-items"></div>
       </div>
 
+      <div class="settings-item--container">
+        <div class="settings-item--header" onclick="onResolutionDropdown()">
+          <div class="settings-item--header-title">Resolution</div>
+          <img id="resolution-arrow" src="./assets/icons/arrow_down.svg" />
+        </div>
+        <div id="resolution-items"></div>
+      </div>
+
+      <div class="settings-item--container">
+        <div class="settings-item--header" onclick="onFrameRateDropdown()">
+          <div class="settings-item--header-title">Framerate</div>
+          <img id="framerate-arrow" src="./assets/icons/arrow_down.svg" />
+        </div>
+        <div id="framerate-items"></div>
+      </div>
+
+      <div class="settings-item--container">
+        <div class="settings-item--header" onclick="onMicDropdown()">
+          <div class="settings-item--header-title">Microphone</div>
+          <img id="mic-arrow" src="./assets/icons/arrow_down.svg" />
+        </div>
+        <div id="mic-items"></div>
+      </div>
+
+      <div class="settings-item--container">
+        <div class="settings-item--header">
+          <div class="settings-item--header-title">Volume</div>
+        </div>
+
+        <br />
+
+        <input
+          type="range"
+          min="1"
+          max="100"
+          value="100"
+          style="width: 100%; height: 2px"
+          onchange="onVolumeChange(this.value)"
+        />
+      </div>
       <br />
 
-      <input type="range" min="1" max="100" value="100" style="width: 100%; height: 2px"
-        onchange="onVolumeChange(this.value)" />
-    </div>
-    <br />
+      <div class="settings-item--container">
+        <div class="settings-item--header">
+          <div
+            class="settings-item--header-title"
+            onclick="window.open('https://www.genkithings.com/pages/support', '_blank')"
+          >
+            Help
+          </div>
+        </div>
+      </div>
 
-    <div class="settings-item--container">
-      <div class="settings-item--header">
-        <div class="settings-item--header-title" onclick="window.open('./credits.html', '_blank')">
-          Credits
+      <div class="settings-item--container">
+        <div class="settings-item--header" onclick="onLangDropdown()">
+          <div class="settings-item--header-title">Language</div>
+          <img id="lang-arrow" src="./assets/icons/arrow_down.svg" />
+        </div>
+        <div id="lang-items"></div>
+      </div>
+
+      <div
+        id="controls_container"
+        class="controls--container"
+        style="visibility: visible"
+      >
+        <div class="controls--icon-container">
+          <img src="./assets/icons/settings.svg" class="controls--icon" />
+        </div>
+        <div class="controls--icon-container">
+          <img
+            id="btn_screenshoot"
+            onclick="onScreenshoot()"
+            src="./assets/icons/screenshot.svg"
+            class="controls--icon"
+          />
+          <img
+            id="btn_screenshoot_active"
+            src="./assets/icons/screenshot_active.svg"
+            class="controls--icon"
+            style="display: none"
+          />
+        </div>
+        <div class="controls--icon-container">
+          <img
+            id="btn_use_mic"
+            onclick="onUseMic()"
+            src="./assets/icons/mic.svg"
+            class="controls--icon"
+          />
+          <img
+            id="btn_use_no_mic"
+            onclick="onUseNoMic()"
+            src="./assets/icons/mic_active.svg"
+            class="controls--icon"
+            style="display: none"
+          />
+        </div>
+        <div class="controls--icon-container">
+          <img
+            id="btn_start_record"
+            onclick="startRecord()"
+            src="./assets/icons/record.svg"
+            class="controls--icon"
+          />
+          <img
+            id="btn_stop_record"
+            onclick="stopRecord()"
+            src="./assets/icons/record_active.svg"
+            class="controls--icon"
+            style="display: none"
+          />
+        </div>
+        <div class="controls--icon-container">
+          <img
+            src="./assets/icons/fullscreen.svg"
+            class="controls--icon"
+            style="width: 50px; height: 50px"
+            onclick="openFullscreen(); return false"
+          />
         </div>
       </div>
     </div>
 
-    <div class="settings-item--container">
-      <div class="settings-item--header" onclick="onLangDropdown()">
-        <div class="settings-item--header-title">Language</div>
-        <img id="lang-arrow" src="./assets/icons/arrow_down.svg" />
-      </div>
-      <div id="lang-items"></div>
-    </div>
-
-    <div id="controls_container" class="controls--container" style="visibility: visible">
-      <div class="controls--icon-container">
-        <img src="./assets/icons/settings.svg" class="controls--icon" />
-      </div>
-      <div class="controls--icon-container">
-        <img id="btn_screenshoot" onclick="onScreenshoot()" src="./assets/icons/screenshot.svg"
-          class="controls--icon" />
-        <img id="btn_screenshoot_active" src="./assets/icons/screenshot_active.svg" class="controls--icon"
-          style="display: none" />
-      </div>
-      <div class="controls--icon-container">
-        <img id="btn_use_mic" onclick="onUseMic()" src="./assets/icons/mic.svg" class="controls--icon" />
-        <img id="btn_use_no_mic" onclick="onUseNoMic()" src="./assets/icons/mic_active.svg" class="controls--icon"
-          style="display: none" />
-      </div>
-      <div class="controls--icon-container">
-        <img id="btn_start_record" onclick="startRecord()" src="./assets/icons/record.svg" class="controls--icon" />
-        <img id="btn_stop_record" onclick="stopRecord()" src="./assets/icons/record_active.svg" class="controls--icon"
-          style="display: none" />
-      </div>
-      <div class="controls--icon-container">
-        <img src="./assets/icons/fullscreen.svg" class="controls--icon" style="width: 50px; height: 50px"
-          onclick="openFullscreen(); return false" />
-      </div>
-    </div>
-  </div>
-
-  <div id="btn_sologans" style="
-          max-width: 30vw;
-          position: absolute;
-          top: 50px;
-          left: 50px;
-          flex-direction: column;
-          background: rgba(0, 0, 0, 0.3);
-          backdrop-filter: blur(10px);
-          color: white;
-          font-family: UbuntuMedium;
+    <div
+      id="btn_sologans"
+      style="
+        max-width: 30vw;
+        position: absolute;
+        top: 50px;
+        left: 50px;
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+        color: white;
+        font-family: UbuntuMedium;
+        font-size: 18px;
+        padding: 30px;
+        visibility: hidden;
+        z-index: 1;
+      "
+    >
+      “Help share the MAGIC”
+      <div
+        style="
+          padding-top: 10px;
+          font-family: UbuntuItalic;
           font-size: 18px;
-          padding: 30px;
-          visibility: hidden;
-          z-index: 1;
-        ">
-    “Help share the MAGIC”
-    <div style="
-            padding-top: 10px;
-            font-family: UbuntuItalic;
-            font-size: 18px;
-            text-align: right;
-          ">
-      - Tetra
+          text-align: right;
+        "
+      >
+        - Tetra
+      </div>
     </div>
-  </div>
 
-  <div id="btn_go_to_website" style="
-          position: absolute;
-          right: 0px;
-          top: 0px;
-          height: 46px;
-          background: rgb(240, 83, 72);
-          padding-left: 40px;
-          padding-right: 40px;
-          color: white;
-          font-family: UbuntuMedium;
-          font-size: 18px;
-          text-transform: uppercase;
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-          align-items: center;
-          visibility: visible;
-          cursor: pointer;
-        " onclick="window.open('https://www.genkithings.com', '_blank')">
-    Go To Website
-  </div>
+    <div
+      id="btn_go_to_website"
+      style="
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        height: 46px;
+        background: rgb(240, 83, 72);
+        padding-left: 40px;
+        padding-right: 40px;
+        color: white;
+        font-family: UbuntuMedium;
+        font-size: 18px;
+        text-transform: uppercase;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        visibility: visible;
+        cursor: pointer;
+      "
+      onclick="window.open('https://www.genkithings.com', '_blank')"
+    >
+      Go To Website
+    </div>
 
-  <lottie-player id="lottie_startup" src="./assets/lottie/startup.json" background="transparent" speed="1" style="
-          width: 300px;
-          height: 300px;
-          z-index: 1;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-        " autoplay></lottie-player>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(function(registration) {
-        console.log('Service Worker registered with scope:', registration.scope);
-      }).catch(function(error) {
-        console.log('Service Worker registration failed:', error);
-      });
-  }
-</script>
-
-</body>
-
+    <lottie-player
+      id="lottie_startup"
+      src="./assets/lottie/startup.json"
+      background="transparent"
+      speed="1"
+      style="
+        width: 300px;
+        height: 300px;
+        z-index: 1;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      "
+      autoplay
+    ></lottie-player>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("/service-worker.js")
+          .then(function (registration) {
+            console.log(
+              "Service Worker registered with scope:",
+              registration.scope
+            );
+          })
+          .catch(function (error) {
+            console.log("Service Worker registration failed:", error);
+          });
+      }
+    </script>
+  </body>
 </html>

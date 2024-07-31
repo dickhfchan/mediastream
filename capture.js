@@ -43,6 +43,7 @@ function setLanguage(lang) {
     file = "ko";
   }
 
+  console.log(data.HELP);
   // Disable the translate of menu items for testing.
   fetch(`./assets/translations/${file}.json`).then((response) => {
     // console.log(response);
@@ -52,7 +53,6 @@ function setLanguage(lang) {
       header_title = document.getElementsByClassName(
         "settings-item--header-title"
       );
-
       header_title[0].innerText = data.VIDEO;
       header_title[1].innerText = data.RESOLUTION;
       header_title[2].innerText = data.FRAMERATE;
