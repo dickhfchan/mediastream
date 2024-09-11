@@ -58,7 +58,7 @@ function setLanguage(lang) {
       header_title[2].innerText = data.FRAMERATE;
       header_title[3].innerText = data.MICROPHONE;
       header_title[4].innerText = data.VOLUME;
-      header_title[5].innerText = data.CREDITS;
+      header_title[5].innerText = data.HELP;
       header_title[6].innerText = data.LANGUAGE;
       // Array.from(header_title).forEach((title) => {
       //   console.log(title.childNodes[0]);
