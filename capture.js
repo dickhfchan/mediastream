@@ -27,7 +27,8 @@ let micSelectedID = "default";
 let useMic = false; // if the mic button is clicked
 let volume = 100;
 let langSelected = "English";
-let fileformat = "webm";
+// let fileformat = "webm";
+let fileformat = "mp4";
 
 function setLanguage(lang) {
   if (lang === "English") {
@@ -449,6 +450,34 @@ function onChangeResolution(event) {
   event.target.style.color = "rgb(255, 255, 255, 0.8)";
   resolution_arrow.style.transform = "";
 
+  // Reset the framerate if the resolution is higher than the overflow value
+  if (shadowcastType === "shadowcast 2 pro") {
+    // console.log("shadowcast 2 pro Check framerate", framerateSelected);
+    if (
+      resolutionSelected === "3840 x 2160" ||
+      resolutionSelected === "2560 x 1440" ||
+      resolutionSelected === "2560 x 1080"
+    ) {
+      // console.log("Reset framerate 1", framerateSelected);
+      if (Number(framerateSelected) > 60) {
+        console.log("Reset framerate 2", framerateSelected);
+        framerateSelected = "60";
+        initFramerateDropdown();
+      }
+    }
+  }
+
+  if (shadowcastType === "shadowcast 2") {
+    // console.log("shadowcast 2 Check framerate", framerateSelected);
+    if (resolutionSelected === "2560 x 1440") {
+      if (Number(framerateSelected) > 30) {
+        console.log("Reset framerate", framerateSelected);
+        framerateSelected = "30";
+        initFramerateDropdown();
+      }
+    }
+  }
+
   // stop the stream
   if (mediaStream !== null) {
     try {
@@ -688,6 +717,13 @@ function onFrameRateDropdown() {
       ];
     } else {
       framerate = ["60", "50", "30", "25"];
+
+      // // Set the framerate to 60 if the selected framerateSelected is over 60 otherwise the screen will be black
+      // console.log("Check framerate", framerateSelected);
+      // if (framerateSelected > "60") {
+      //   console.log("Reset framerate", framerateSelected);
+      //   framerateSelected = "60";
+      // }
     }
   }
 
@@ -695,6 +731,11 @@ function onFrameRateDropdown() {
     console.log("shadowcast 2 got");
     if (resolutionSelected === "2560 x 1440") {
       framerate = ["30", "25", "20", "15", "10", "5"];
+
+      // // Set the framerate to 30 if the selected framerateSelected is 60 otherwise the screen will be black
+      // if (framerateSelected === "60") {
+      //   framerateSelected = "30";
+      // }
     }
   }
 
@@ -1138,14 +1179,17 @@ function onScreenshoot() {
 // https://dev.to/ethand91/mediarecorder-api-tutorial-54n8
 //
 const startRecord = async () => {
-  let mimeType = "video/webm;codecs=vp8,opus";
+  // let mimeType = "video/webm;codecs=vp8,opus";
+  let mimeType = "video/webm;codecs=h264";
 
   if (!MediaRecorder.isTypeSupported(mimeType)) {
     // alert("vp8/opus mime type is not supported");
 
     // return;
-    mimeType = "video/mp4";
-    fileformat = "mp4";
+    // mimeType = "video/mp4";
+    // fileformat = "mp4";
+    mineType = "video/webm;codecs=vp8,opus";
+    fileformat = "webm";
   }
 
   const options = {
